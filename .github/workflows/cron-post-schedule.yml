@@ -13,10 +13,19 @@ jobs:
       CRON_API_KEY: ${{ secrets.CRON_API_KEY }}
     runs-on: ubuntu-latest
     steps:
-      - name: cURL request
+      - name: cURL POST request
         if: ${{ env.CRON_API_KEY }}
         run: |
           curl ${{ secrets.APP_URL }}/api/cron/Post \
+            -X POST \
+            -H 'content-type: application/json' \
+            -H 'authorization: ${{ secrets.CRON_API_KEY }}' \
+            --fail
+            
+      - name: cURL Comment Plug request
+        if: ${{ env.CRON_API_KEY }}
+        run: |
+          curl ${{ secrets.APP_URL }}/api/cron/CommentPlug \
             -X POST \
             -H 'content-type: application/json' \
             -H 'authorization: ${{ secrets.CRON_API_KEY }}' \
