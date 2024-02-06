@@ -21,7 +21,13 @@ jobs:
             -H 'content-type: application/json' \
             -H 'authorization: ${{ secrets.CRON_API_KEY }}' \
             --fail
-            
+
+  cron-commentPlugSchedule:
+    env:
+      APP_URL: ${{ secrets.APP_URL }}
+      CRON_API_KEY: ${{ secrets.CRON_API_KEY }}
+    runs-on: ubuntu-latest
+    steps:
       - name: cURL Comment Plug request
         if: ${{ env.CRON_API_KEY }}
         run: |
